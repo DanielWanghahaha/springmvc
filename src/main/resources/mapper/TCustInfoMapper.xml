@@ -1,0 +1,638 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yiche.wq.core.dao.TCustInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.yiche.wq.common.domain.po.TCustInfo" >
+    <id column="cust_id" property="custId" jdbcType="INTEGER" />
+    <result column="cust_code" property="custCode" jdbcType="VARCHAR" />
+    <result column="cust_name" property="custName" jdbcType="VARCHAR" />
+    <result column="abbr_name" property="abbrName" jdbcType="VARCHAR" />
+    <result column="e_name" property="eName" jdbcType="VARCHAR" />
+    <result column="type_id" property="typeId" jdbcType="VARCHAR" />
+    <result column="group_id" property="groupId" jdbcType="INTEGER" />
+    <result column="cust_pid" property="custPid" jdbcType="INTEGER" />
+    <result column="shop_level" property="shopLevel" jdbcType="INTEGER" />
+    <result column="industry_id" property="industryId" jdbcType="INTEGER" />
+    <result column="brand_id" property="brandId" jdbcType="INTEGER" />
+    <result column="province_id" property="provinceId" jdbcType="INTEGER" />
+    <result column="city_id" property="cityId" jdbcType="INTEGER" />
+    <result column="county_id" property="countyId" jdbcType="INTEGER" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="zipcode" property="zipcode" jdbcType="INTEGER" />
+    <result column="office_tel" property="officeTel" jdbcType="VARCHAR" />
+    <result column="place_area" property="placeArea" jdbcType="VARCHAR" />
+    <result column="notes" property="notes" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="label_id" property="labelId" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="end_time" property="endTime" jdbcType="DATE" />
+    <result column="subclass_id" property="subclassId" jdbcType="INTEGER" />
+    <result column="fours_id" property="foursId" jdbcType="INTEGER" />
+    <result column="dealer_id" property="dealerId" jdbcType="INTEGER" />
+    <result column="salenet" property="salenet" jdbcType="VARCHAR" />
+    <result column="longitude" property="longitude" jdbcType="REAL" />
+    <result column="latitude" property="latitude" jdbcType="REAL" />
+    <result column="vendor_code" property="vendorCode" jdbcType="VARCHAR" />
+    <result column="companypro" property="companypro" jdbcType="VARCHAR" />
+    <result column="create_user" property="createUser" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    cust_id, cust_code, cust_name, abbr_name, e_name, type_id, group_id, cust_pid, shop_level, 
+    industry_id, brand_id, province_id, city_id, county_id, address, zipcode, office_tel, 
+    place_area, notes, status, label_id, create_time, end_time, subclass_id, fours_id, 
+    dealer_id, salenet, longitude, latitude, vendor_code, companypro, create_user
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yiche.wq.common.domain.po.TCustInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_cust_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_cust_info
+    where cust_id = #{custId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_cust_info
+    where cust_id = #{custId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yiche.wq.common.domain.po.TCustInfoExample" >
+    delete from t_cust_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yiche.wq.common.domain.po.TCustInfo" >
+    insert into t_cust_info (cust_id, cust_code, cust_name, 
+      abbr_name, e_name, type_id, 
+      group_id, cust_pid, shop_level, 
+      industry_id, brand_id, province_id, 
+      city_id, county_id, address, 
+      zipcode, office_tel, place_area, 
+      notes, status, label_id, 
+      create_time, end_time, subclass_id, 
+      fours_id, dealer_id, salenet, 
+      longitude, latitude, vendor_code, 
+      companypro, create_user)
+    values (#{custId,jdbcType=INTEGER}, #{custCode,jdbcType=VARCHAR}, #{custName,jdbcType=VARCHAR}, 
+      #{abbrName,jdbcType=VARCHAR}, #{eName,jdbcType=VARCHAR}, #{typeId,jdbcType=VARCHAR}, 
+      #{groupId,jdbcType=INTEGER}, #{custPid,jdbcType=INTEGER}, #{shopLevel,jdbcType=INTEGER}, 
+      #{industryId,jdbcType=INTEGER}, #{brandId,jdbcType=INTEGER}, #{provinceId,jdbcType=INTEGER}, 
+      #{cityId,jdbcType=INTEGER}, #{countyId,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, 
+      #{zipcode,jdbcType=INTEGER}, #{officeTel,jdbcType=VARCHAR}, #{placeArea,jdbcType=VARCHAR}, 
+      #{notes,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{labelId,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=DATE}, #{subclassId,jdbcType=INTEGER}, 
+      #{foursId,jdbcType=INTEGER}, #{dealerId,jdbcType=INTEGER}, #{salenet,jdbcType=VARCHAR}, 
+      #{longitude,jdbcType=REAL}, #{latitude,jdbcType=REAL}, #{vendorCode,jdbcType=VARCHAR}, 
+      #{companypro,jdbcType=VARCHAR}, #{createUser,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yiche.wq.common.domain.po.TCustInfo" >
+    insert into t_cust_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="custId != null" >
+        cust_id,
+      </if>
+      <if test="custCode != null" >
+        cust_code,
+      </if>
+      <if test="custName != null" >
+        cust_name,
+      </if>
+      <if test="abbrName != null" >
+        abbr_name,
+      </if>
+      <if test="eName != null" >
+        e_name,
+      </if>
+      <if test="typeId != null" >
+        type_id,
+      </if>
+      <if test="groupId != null" >
+        group_id,
+      </if>
+      <if test="custPid != null" >
+        cust_pid,
+      </if>
+      <if test="shopLevel != null" >
+        shop_level,
+      </if>
+      <if test="industryId != null" >
+        industry_id,
+      </if>
+      <if test="brandId != null" >
+        brand_id,
+      </if>
+      <if test="provinceId != null" >
+        province_id,
+      </if>
+      <if test="cityId != null" >
+        city_id,
+      </if>
+      <if test="countyId != null" >
+        county_id,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="zipcode != null" >
+        zipcode,
+      </if>
+      <if test="officeTel != null" >
+        office_tel,
+      </if>
+      <if test="placeArea != null" >
+        place_area,
+      </if>
+      <if test="notes != null" >
+        notes,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="labelId != null" >
+        label_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="subclassId != null" >
+        subclass_id,
+      </if>
+      <if test="foursId != null" >
+        fours_id,
+      </if>
+      <if test="dealerId != null" >
+        dealer_id,
+      </if>
+      <if test="salenet != null" >
+        salenet,
+      </if>
+      <if test="longitude != null" >
+        longitude,
+      </if>
+      <if test="latitude != null" >
+        latitude,
+      </if>
+      <if test="vendorCode != null" >
+        vendor_code,
+      </if>
+      <if test="companypro != null" >
+        companypro,
+      </if>
+      <if test="createUser != null" >
+        create_user,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="custId != null" >
+        #{custId,jdbcType=INTEGER},
+      </if>
+      <if test="custCode != null" >
+        #{custCode,jdbcType=VARCHAR},
+      </if>
+      <if test="custName != null" >
+        #{custName,jdbcType=VARCHAR},
+      </if>
+      <if test="abbrName != null" >
+        #{abbrName,jdbcType=VARCHAR},
+      </if>
+      <if test="eName != null" >
+        #{eName,jdbcType=VARCHAR},
+      </if>
+      <if test="typeId != null" >
+        #{typeId,jdbcType=VARCHAR},
+      </if>
+      <if test="groupId != null" >
+        #{groupId,jdbcType=INTEGER},
+      </if>
+      <if test="custPid != null" >
+        #{custPid,jdbcType=INTEGER},
+      </if>
+      <if test="shopLevel != null" >
+        #{shopLevel,jdbcType=INTEGER},
+      </if>
+      <if test="industryId != null" >
+        #{industryId,jdbcType=INTEGER},
+      </if>
+      <if test="brandId != null" >
+        #{brandId,jdbcType=INTEGER},
+      </if>
+      <if test="provinceId != null" >
+        #{provinceId,jdbcType=INTEGER},
+      </if>
+      <if test="cityId != null" >
+        #{cityId,jdbcType=INTEGER},
+      </if>
+      <if test="countyId != null" >
+        #{countyId,jdbcType=INTEGER},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="zipcode != null" >
+        #{zipcode,jdbcType=INTEGER},
+      </if>
+      <if test="officeTel != null" >
+        #{officeTel,jdbcType=VARCHAR},
+      </if>
+      <if test="placeArea != null" >
+        #{placeArea,jdbcType=VARCHAR},
+      </if>
+      <if test="notes != null" >
+        #{notes,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="labelId != null" >
+        #{labelId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=DATE},
+      </if>
+      <if test="subclassId != null" >
+        #{subclassId,jdbcType=INTEGER},
+      </if>
+      <if test="foursId != null" >
+        #{foursId,jdbcType=INTEGER},
+      </if>
+      <if test="dealerId != null" >
+        #{dealerId,jdbcType=INTEGER},
+      </if>
+      <if test="salenet != null" >
+        #{salenet,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null" >
+        #{longitude,jdbcType=REAL},
+      </if>
+      <if test="latitude != null" >
+        #{latitude,jdbcType=REAL},
+      </if>
+      <if test="vendorCode != null" >
+        #{vendorCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companypro != null" >
+        #{companypro,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yiche.wq.common.domain.po.TCustInfoExample" resultType="java.lang.Integer" >
+    select count(*) from t_cust_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_cust_info
+    <set >
+      <if test="record.custId != null" >
+        cust_id = #{record.custId,jdbcType=INTEGER},
+      </if>
+      <if test="record.custCode != null" >
+        cust_code = #{record.custCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custName != null" >
+        cust_name = #{record.custName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.abbrName != null" >
+        abbr_name = #{record.abbrName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.eName != null" >
+        e_name = #{record.eName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.typeId != null" >
+        type_id = #{record.typeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupId != null" >
+        group_id = #{record.groupId,jdbcType=INTEGER},
+      </if>
+      <if test="record.custPid != null" >
+        cust_pid = #{record.custPid,jdbcType=INTEGER},
+      </if>
+      <if test="record.shopLevel != null" >
+        shop_level = #{record.shopLevel,jdbcType=INTEGER},
+      </if>
+      <if test="record.industryId != null" >
+        industry_id = #{record.industryId,jdbcType=INTEGER},
+      </if>
+      <if test="record.brandId != null" >
+        brand_id = #{record.brandId,jdbcType=INTEGER},
+      </if>
+      <if test="record.provinceId != null" >
+        province_id = #{record.provinceId,jdbcType=INTEGER},
+      </if>
+      <if test="record.cityId != null" >
+        city_id = #{record.cityId,jdbcType=INTEGER},
+      </if>
+      <if test="record.countyId != null" >
+        county_id = #{record.countyId,jdbcType=INTEGER},
+      </if>
+      <if test="record.address != null" >
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zipcode != null" >
+        zipcode = #{record.zipcode,jdbcType=INTEGER},
+      </if>
+      <if test="record.officeTel != null" >
+        office_tel = #{record.officeTel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.placeArea != null" >
+        place_area = #{record.placeArea,jdbcType=VARCHAR},
+      </if>
+      <if test="record.notes != null" >
+        notes = #{record.notes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.labelId != null" >
+        label_id = #{record.labelId,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endTime != null" >
+        end_time = #{record.endTime,jdbcType=DATE},
+      </if>
+      <if test="record.subclassId != null" >
+        subclass_id = #{record.subclassId,jdbcType=INTEGER},
+      </if>
+      <if test="record.foursId != null" >
+        fours_id = #{record.foursId,jdbcType=INTEGER},
+      </if>
+      <if test="record.dealerId != null" >
+        dealer_id = #{record.dealerId,jdbcType=INTEGER},
+      </if>
+      <if test="record.salenet != null" >
+        salenet = #{record.salenet,jdbcType=VARCHAR},
+      </if>
+      <if test="record.longitude != null" >
+        longitude = #{record.longitude,jdbcType=REAL},
+      </if>
+      <if test="record.latitude != null" >
+        latitude = #{record.latitude,jdbcType=REAL},
+      </if>
+      <if test="record.vendorCode != null" >
+        vendor_code = #{record.vendorCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companypro != null" >
+        companypro = #{record.companypro,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createUser != null" >
+        create_user = #{record.createUser,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_cust_info
+    set cust_id = #{record.custId,jdbcType=INTEGER},
+      cust_code = #{record.custCode,jdbcType=VARCHAR},
+      cust_name = #{record.custName,jdbcType=VARCHAR},
+      abbr_name = #{record.abbrName,jdbcType=VARCHAR},
+      e_name = #{record.eName,jdbcType=VARCHAR},
+      type_id = #{record.typeId,jdbcType=VARCHAR},
+      group_id = #{record.groupId,jdbcType=INTEGER},
+      cust_pid = #{record.custPid,jdbcType=INTEGER},
+      shop_level = #{record.shopLevel,jdbcType=INTEGER},
+      industry_id = #{record.industryId,jdbcType=INTEGER},
+      brand_id = #{record.brandId,jdbcType=INTEGER},
+      province_id = #{record.provinceId,jdbcType=INTEGER},
+      city_id = #{record.cityId,jdbcType=INTEGER},
+      county_id = #{record.countyId,jdbcType=INTEGER},
+      address = #{record.address,jdbcType=VARCHAR},
+      zipcode = #{record.zipcode,jdbcType=INTEGER},
+      office_tel = #{record.officeTel,jdbcType=VARCHAR},
+      place_area = #{record.placeArea,jdbcType=VARCHAR},
+      notes = #{record.notes,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
+      label_id = #{record.labelId,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      end_time = #{record.endTime,jdbcType=DATE},
+      subclass_id = #{record.subclassId,jdbcType=INTEGER},
+      fours_id = #{record.foursId,jdbcType=INTEGER},
+      dealer_id = #{record.dealerId,jdbcType=INTEGER},
+      salenet = #{record.salenet,jdbcType=VARCHAR},
+      longitude = #{record.longitude,jdbcType=REAL},
+      latitude = #{record.latitude,jdbcType=REAL},
+      vendor_code = #{record.vendorCode,jdbcType=VARCHAR},
+      companypro = #{record.companypro,jdbcType=VARCHAR},
+      create_user = #{record.createUser,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yiche.wq.common.domain.po.TCustInfo" >
+    update t_cust_info
+    <set >
+      <if test="custCode != null" >
+        cust_code = #{custCode,jdbcType=VARCHAR},
+      </if>
+      <if test="custName != null" >
+        cust_name = #{custName,jdbcType=VARCHAR},
+      </if>
+      <if test="abbrName != null" >
+        abbr_name = #{abbrName,jdbcType=VARCHAR},
+      </if>
+      <if test="eName != null" >
+        e_name = #{eName,jdbcType=VARCHAR},
+      </if>
+      <if test="typeId != null" >
+        type_id = #{typeId,jdbcType=VARCHAR},
+      </if>
+      <if test="groupId != null" >
+        group_id = #{groupId,jdbcType=INTEGER},
+      </if>
+      <if test="custPid != null" >
+        cust_pid = #{custPid,jdbcType=INTEGER},
+      </if>
+      <if test="shopLevel != null" >
+        shop_level = #{shopLevel,jdbcType=INTEGER},
+      </if>
+      <if test="industryId != null" >
+        industry_id = #{industryId,jdbcType=INTEGER},
+      </if>
+      <if test="brandId != null" >
+        brand_id = #{brandId,jdbcType=INTEGER},
+      </if>
+      <if test="provinceId != null" >
+        province_id = #{provinceId,jdbcType=INTEGER},
+      </if>
+      <if test="cityId != null" >
+        city_id = #{cityId,jdbcType=INTEGER},
+      </if>
+      <if test="countyId != null" >
+        county_id = #{countyId,jdbcType=INTEGER},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="zipcode != null" >
+        zipcode = #{zipcode,jdbcType=INTEGER},
+      </if>
+      <if test="officeTel != null" >
+        office_tel = #{officeTel,jdbcType=VARCHAR},
+      </if>
+      <if test="placeArea != null" >
+        place_area = #{placeArea,jdbcType=VARCHAR},
+      </if>
+      <if test="notes != null" >
+        notes = #{notes,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="labelId != null" >
+        label_id = #{labelId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=DATE},
+      </if>
+      <if test="subclassId != null" >
+        subclass_id = #{subclassId,jdbcType=INTEGER},
+      </if>
+      <if test="foursId != null" >
+        fours_id = #{foursId,jdbcType=INTEGER},
+      </if>
+      <if test="dealerId != null" >
+        dealer_id = #{dealerId,jdbcType=INTEGER},
+      </if>
+      <if test="salenet != null" >
+        salenet = #{salenet,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null" >
+        longitude = #{longitude,jdbcType=REAL},
+      </if>
+      <if test="latitude != null" >
+        latitude = #{latitude,jdbcType=REAL},
+      </if>
+      <if test="vendorCode != null" >
+        vendor_code = #{vendorCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companypro != null" >
+        companypro = #{companypro,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where cust_id = #{custId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yiche.wq.common.domain.po.TCustInfo" >
+    update t_cust_info
+    set cust_code = #{custCode,jdbcType=VARCHAR},
+      cust_name = #{custName,jdbcType=VARCHAR},
+      abbr_name = #{abbrName,jdbcType=VARCHAR},
+      e_name = #{eName,jdbcType=VARCHAR},
+      type_id = #{typeId,jdbcType=VARCHAR},
+      group_id = #{groupId,jdbcType=INTEGER},
+      cust_pid = #{custPid,jdbcType=INTEGER},
+      shop_level = #{shopLevel,jdbcType=INTEGER},
+      industry_id = #{industryId,jdbcType=INTEGER},
+      brand_id = #{brandId,jdbcType=INTEGER},
+      province_id = #{provinceId,jdbcType=INTEGER},
+      city_id = #{cityId,jdbcType=INTEGER},
+      county_id = #{countyId,jdbcType=INTEGER},
+      address = #{address,jdbcType=VARCHAR},
+      zipcode = #{zipcode,jdbcType=INTEGER},
+      office_tel = #{officeTel,jdbcType=VARCHAR},
+      place_area = #{placeArea,jdbcType=VARCHAR},
+      notes = #{notes,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      label_id = #{labelId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=DATE},
+      subclass_id = #{subclassId,jdbcType=INTEGER},
+      fours_id = #{foursId,jdbcType=INTEGER},
+      dealer_id = #{dealerId,jdbcType=INTEGER},
+      salenet = #{salenet,jdbcType=VARCHAR},
+      longitude = #{longitude,jdbcType=REAL},
+      latitude = #{latitude,jdbcType=REAL},
+      vendor_code = #{vendorCode,jdbcType=VARCHAR},
+      companypro = #{companypro,jdbcType=VARCHAR},
+      create_user = #{createUser,jdbcType=VARCHAR}
+    where cust_id = #{custId,jdbcType=INTEGER}
+  </update>
+</mapper>
